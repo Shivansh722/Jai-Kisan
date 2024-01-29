@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vishnu/components/marquee.dart';
+import 'package:vishnu/essentials/marquee.dart';
 
 class LiveRunningBar extends StatelessWidget {
   final double price;

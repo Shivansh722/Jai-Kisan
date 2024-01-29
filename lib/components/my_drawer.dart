@@ -12,7 +12,7 @@ class MyDrawer extends StatelessWidget {
       child: Column(
         children: [
           // User profile
-          DrawerHeader(
+          const DrawerHeader(
             child: Center(
               child: Icon(
                 Icons.person,

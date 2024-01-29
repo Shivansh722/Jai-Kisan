@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vishnu/pages/home_page.dart';
+import 'package:vishnu/authentication/auth_gate.dart';
+
+
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -12,7 +14,7 @@ class SplashPage extends StatelessWidget {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const HomePage(),
+          builder: (context) => const AuthGate(),
         ),
       );
     });
@@ -30,7 +32,7 @@ class SplashPage extends StatelessWidget {
               width: 300,
               height: 250,
             ),
-          SizedBox(height: 200),
+         const SizedBox(height: 200),
             const Align(
             alignment: Alignment.bottomCenter,
            
