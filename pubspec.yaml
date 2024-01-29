@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  flutter_marquee: 2.0.1
+  fading_edge_scrollview:
 
 dev_dependencies:
   flutter_test:

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:vishnu/components/marquee.dart';
 
 class LiveRunningBar extends StatelessWidget {
   final double price;
 
-  const LiveRunningBar({Key? key, required this.price}) : super(key: key);
+  const LiveRunningBar({super.key, required this.price});
 
   @override
   Widget build(BuildContext context) {
@@ -15,20 +16,20 @@ class LiveRunningBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: Text(
-              '\$$price', // Use whatever format you need for your price
-              style: TextStyle(
-                color: isPriceHigh ? Colors.white : Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
           Expanded(
-            flex: (price * 2).toInt(),
-            child: Container(
-              color: Colors.white,
+            child: Marquee(
+              text: 'Live Price: $price',
+              style: const TextStyle(fontWeight: FontWeight.bold),
+              scrollAxis: Axis.horizontal,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              blankSpace: 20.0,
+              velocity: 100.0,
+              pauseAfterRound: const Duration(seconds: 1),
+              startPadding: 10.0,
+              accelerationDuration: const Duration(seconds: 1),
+              accelerationCurve: Curves.linear,
+              decelerationDuration: const Duration(milliseconds: 500),
+              decelerationCurve: Curves.easeOut,
             ),
           ),
           Container(
