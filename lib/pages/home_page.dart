@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
           Container(
             height: 30, // Adjust the height as needed
             color: Colors.green.shade300,
-            child: LiveRunningBar(price: 3999,), // Replace with the actual instantiation of your LiveRunningBar
+            child: LiveRunningBar(price: 60,), // Replace with the actual instantiation of your LiveRunningBar
           ),
         ],
       ),
