@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:vishnu/pages/prediction_page.dart';
 import 'package:vishnu/pages/settings_page.dart'; // Import the path to SettingPage
+
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({Key? key});
@@ -36,8 +37,8 @@ class MyDrawer extends StatelessWidget {
 
           // Settings list tile
           ListTile(
-            title:const  Text('S E T T I N G S'),
-            leading: Icon(Icons.settings),
+            title:const  Text('P R E D I C T I O N'),
+            leading: Icon(Icons.batch_prediction),
             onTap: () {
               Navigator.pop(context); // pop the drawer
 
@@ -45,13 +46,33 @@ class MyDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const SettingsPage(),
+                  builder: (context) => const PredictionPage(),
                 ),
               );
             },
             // Add onTap functionality for navigating to settings page
           ),
 
+          // Settings list tile
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListTile(
+              title:const  Text('S E T T I N G S'),
+              leading: Icon(Icons.settings),
+              onTap: () {
+                Navigator.pop(context); // pop the drawer
+            
+                // navigate to settings page
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SettingsPage(),
+                  ),
+                );
+              },
+              // Add onTap functionality for navigating to settings page
+            ),
+          ),
           // Logout list tile
           const Padding(
             padding: const EdgeInsets.all(8.0),
