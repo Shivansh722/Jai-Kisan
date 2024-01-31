@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vishnu/components/dropdown_menu.dart';
 
 class PredictionPage extends StatefulWidget {
   const PredictionPage({Key? key}) : super(key: key);
@@ -30,92 +31,57 @@ class _PredictionPageState extends State<PredictionPage> {
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Commodity Dropdown
-                  Text('Commodity:'),
-                  DropdownButton<String>(
-                    
-                    value: selectedCommodity,
-                    onChanged: (String? value) {
-                      setState(() {
-                        selectedCommodity = value;
-                      });
-                    },
-                    items: ['Commodity1', 'Commodity2', 'Commodity3']
-                        .map<DropdownMenuItem<String>>(
-                          (String value) => DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          ),
-                        )
-                        .toList(),
+                  Column(
+                    children: [
+                      CustomDropdownButton(
+                          label: "Commodity",
+                          options: const [
+                            'Commodity1',
+                            'Commodity2',
+                            'Commodity3'
+                          ],
+                          selectedValue: selectedCommodity,
+                          onChanged: (String? value) {
+                            setState(() {
+                              selectedCommodity = value;
+                            });
+                          }),
+                      CustomDropdownButton(
+                          label: "State",
+                          options: const ['State1', 'State2', 'State3'],
+                          selectedValue: selectedState,
+                          onChanged: (String? value) {
+                            setState(() {
+                              selectedState = value;
+                            });
+                          }),
+                      CustomDropdownButton(
+                          label: "District",
+                          options: const [
+                            'District1',
+                            'District2',
+                            'District3'
+                          ],
+                          selectedValue: selectedDistrict,
+                          onChanged: (String? value) {
+                            setState(() {
+                              selectedDistrict = value;
+                            });
+                          }),
+                      CustomDropdownButton(
+                          label: "Market",
+                          options: const ['Market1', 'Market2', 'Market3'],
+                          selectedValue: selectedMarket,
+                          onChanged: (String? value) {
+                            setState(() {
+                              selectedMarket = value;
+                            });
+                          }),
+                    ],
                   ),
-                  SizedBox(height: 16.0),
-
-                  // State Dropdown
-                  Text('State:'),
-                  DropdownButton<String>(
-                    value: selectedState,
-                    onChanged: (String? value) {
-                      setState(() {
-                        selectedState = value;
-                      });
-                    },
-                    items: ['State1', 'State2', 'State3']
-                        .map<DropdownMenuItem<String>>(
-                          (String value) => DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                  SizedBox(height: 16.0),
-
-                  // District Dropdown
-                  Text('District:'),
-                  DropdownButton<String>(
-                    value: selectedDistrict,
-                    onChanged: (String? value) {
-                      setState(() {
-                        selectedDistrict = value;
-                      });
-                    },
-                    items: ['District1', 'District2', 'District3']
-                        .map<DropdownMenuItem<String>>(
-                          (String value) => DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                  SizedBox(height: 16.0),
-
-                  // Market Dropdown
-                  Text('Market:'),
-                  DropdownButton<String>(
-                    value: selectedMarket,
-                    onChanged: (String? value) {
-                      setState(() {
-                        selectedMarket = value;
-                      });
-                    },
-                    items: ['Market1', 'Market2', 'Market3']
-                        .map<DropdownMenuItem<String>>(
-                          (String value) => DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                  SizedBox(height: 16.0),
-
-                  // Date picker can be added here
-
-                  // Submit Button
+                  const SizedBox(height: 20.0),
                   ElevatedButton(
                     onPressed: () {
                       // Handle the form submission here
