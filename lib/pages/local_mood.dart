@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vishnu/components/pie_chart.dart';
+import 'package:vishnu/components/bar_chart.dart';
 
 class LocalMoodPage extends StatelessWidget {
   final Map<String, bool> surveyAnswers;
@@ -21,7 +21,7 @@ class LocalMoodPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Local Mood'),
+        title: const Text('Local Mood'),
       ),
       body: Center(
         child: Padding(
@@ -38,31 +38,25 @@ class LocalMoodPage extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Card(
                 elevation: 3,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
-                      Text(
-                        'Survey Results',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                      const SizedBox(height: 20),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.3,
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            BarChartSample1(
+                              surveyAnswers: surveyAnswers,
+                            ),
+                          ],
                         ),
-                      ),
-                      SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          _buildGraphItem('Yes', yesPercentage),
-                          _buildGraphItem('No', noPercentage),
-                        ],
-                      ),
-                      const SizedBox(height: 20,),
-                      Container(
-                        child: const PieChartSample(),
                       ),
                     ],
                   ),
@@ -80,20 +74,20 @@ class LocalMoodPage extends StatelessWidget {
       children: [
         Text(
           '$label: ${percentage.toStringAsFixed(1)}%',
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Container(
           height: percentage,
-          width: 30,
+          width: 40,
           color: (label == 'Yes') ? Colors.green : Colors.red,
           child: Center(
             child: Text(
               '${percentage.toStringAsFixed(1)}%',
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
               ),
             ),

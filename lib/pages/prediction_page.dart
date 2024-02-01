@@ -8,7 +8,7 @@ class PredictionPage extends StatefulWidget {
   const PredictionPage({super.key});
 
   @override
-  _PredictionPageState createState() => _PredictionPageState();
+  State<PredictionPage> createState() => _PredictionPageState();
 }
 
 class _PredictionPageState extends State<PredictionPage> {

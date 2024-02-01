@@ -1,11 +1,13 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:vishnu/components/image_picker.dart';
 import 'package:vishnu/pages/form_page.dart';
-import 'package:vishnu/pages/login_page.dart';
 import 'package:vishnu/pages/settings_page.dart';
 import 'package:vishnu/pages/prediction_page.dart';
 import 'package:vishnu/authentication/auth_service.dart';
 
 class MyDrawer extends StatelessWidget {
+  File? _selectedImage;
 
   void logout(BuildContext context) {
     final _auth = AuthService();
@@ -15,10 +17,13 @@ class MyDrawer extends StatelessWidget {
      // Replace '/login' with your login screen route
   }
 
-  const MyDrawer({Key? key});
+  MyDrawer({super.key});
+
+  
 
   @override
   Widget build(BuildContext context) {
+    
     return Drawer(
       backgroundColor: Theme.of(context).colorScheme.background,
       child: Column(
@@ -68,6 +73,27 @@ class MyDrawer extends StatelessWidget {
                  ),
                );
             },
+          ),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListTile(
+              title: const Text('LEAF DISEASE DETECTION'),
+              leading: const Icon(Icons.energy_savings_leaf),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                context,
+                   MaterialPageRoute(
+                     builder: (context) =>  ImageInput(
+                       onPickImage: (image) {
+                        _selectedImage = image;
+                      },
+                     ),
+                   ),
+                 );
+              },
+            ),
           ),
 
           Padding(

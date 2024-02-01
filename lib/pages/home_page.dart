@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.green.shade300,
         foregroundColor: Colors.white,
       ),
-      drawer: const MyDrawer(),
+      drawer: MyDrawer(),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
