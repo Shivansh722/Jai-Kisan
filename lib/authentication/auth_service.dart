@@ -23,6 +23,7 @@ class AuthService {
             await _auth.createUserWithEmailAndPassword(
               email: email,
               password: password
+              
           );
           return userCredential;
         } 

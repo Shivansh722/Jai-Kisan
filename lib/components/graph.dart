@@ -63,14 +63,35 @@ class _LineChartWidgetState extends State<LineChartWidget> {
     );
     Widget text;
     switch (value.toInt()) {
+      case 1:
+        text = const Text('1', style: style);
+        break;
       case 2:
-        text = const Text('MAR', style: style);
+        text = const Text('2', style: style);
+        break;
+      case 3:
+        text = const Text('3', style: style);
+        break;
+      case 4:
+        text = const Text('4', style: style);
         break;
       case 5:
-        text = const Text('JUN', style: style);
+        text = const Text('5', style: style);
+        break;
+      case 6:
+        text = const Text('6', style: style);
+        break;
+      case 7:
+        text = const Text('7', style: style);
         break;
       case 8:
-        text = const Text('SEP', style: style);
+        text = const Text('8', style: style);
+        break;
+      case 9:
+        text = const Text('9', style: style);
+        break;
+      case 10:
+        text = const Text('10', style: style);
         break;
       default:
         text = const Text('', style: style);
@@ -91,13 +112,19 @@ class _LineChartWidgetState extends State<LineChartWidget> {
     String text;
     switch (value.toInt()) {
       case 1:
-        text = '10K';
+        text = '1k';
+        break;
+      case 2:
+        text = '2k';
         break;
       case 3:
-        text = '30k';
+        text = '3k';
+        break;
+      case 4:
+        text = '4k';
         break;
       case 5:
-        text = '50k';
+        text = '5k';
         break;
       default:
         return Container();
@@ -135,6 +162,14 @@ class _LineChartWidgetState extends State<LineChartWidget> {
           sideTitles: SideTitles(showTitles: false),
         ),
         bottomTitles: AxisTitles(
+          axisNameWidget: const Text(
+            'Days',
+            style: TextStyle(
+              fontSize: 10,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           sideTitles: SideTitles(
             showTitles: true,
             reservedSize: 30,
@@ -143,6 +178,14 @@ class _LineChartWidgetState extends State<LineChartWidget> {
           ),
         ),
         leftTitles: AxisTitles(
+          axisNameWidget: const Text(
+            'Price',
+            style: TextStyle(
+              fontSize: 10,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           sideTitles: SideTitles(
             showTitles: true,
             interval: 1,

@@ -1,6 +1,7 @@
 // results_page.dart
 
 import 'package:flutter/material.dart';
+import 'package:vishnu/components/price_card.dart';
 
 class ResultPage extends StatelessWidget {
 
@@ -21,21 +22,53 @@ class ResultPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Results'),
+        title: const Text('Results'),
+        centerTitle: true,
+        backgroundColor: Colors.green.shade300,
+        foregroundColor: Colors.white,
       ),
-      body: Center(
+      body: Container(
+        padding: const EdgeInsets.fromLTRB(25, 40, 16, 0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(
-              'Selected Values:',
-              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+            Row(
+              children: [
+                const Text(
+                  'Market: ',
+                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(width: 10.0),
+                Text(
+                  selectedMarket ?? 'No Market Selected',
+                  style: const TextStyle(fontSize: 16.0),
+                ),
+              ],
             ),
-            SizedBox(height: 10.0),
-            Text(
-              selectedCommodity ?? 'No Commodity Selected',
-              style: TextStyle(fontSize: 16.0),
+            
+            const SizedBox(height: 20.0),
+            Row(
+              children: [
+                const Text(
+                  'Commodity: ',
+                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(width: 10.0),
+                Text(
+                  selectedCommodity?? 'No Commodity Selected',
+                  style: const TextStyle(fontSize: 16.0),
+                ),
+              ],
             ),
+            const SizedBox(height: 20.0),
+            const Center(
+            child: PriceCard(
+              minPrice: '100',
+              modelPrice: '150',
+              maxPrice: '200',
+            ),
+          ),
+          
           ],
         ),
       ),
