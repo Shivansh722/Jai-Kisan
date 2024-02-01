@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class BarChartSample1 extends StatefulWidget {
   final Map<String, bool> surveyAnswers;
 
-  const BarChartSample1({required this.surveyAnswers, Key? key}) : super(key: key);
+  const BarChartSample1({required this.surveyAnswers, super.key});
 
   List<Color> get availableColors => const <Color>[
     Colors.purple,

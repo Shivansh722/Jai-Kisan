@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:vishnu/pages/local_mood.dart';
 
 class MarketSurveyScreen extends StatefulWidget {
+  const MarketSurveyScreen({super.key});
   @override
-  _MarketSurveyScreenState createState() => _MarketSurveyScreenState();
+  State<MarketSurveyScreen> createState() => _MarketSurveyScreenState();
 }
 
 class _MarketSurveyScreenState extends State<MarketSurveyScreen> {
@@ -22,7 +23,7 @@ class _MarketSurveyScreenState extends State<MarketSurveyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Market Survey'),
+        title: const Text('Market Survey'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -39,12 +40,12 @@ class _MarketSurveyScreenState extends State<MarketSurveyScreen> {
                     children: [
                       Text(
                         question,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -55,13 +56,13 @@ class _MarketSurveyScreenState extends State<MarketSurveyScreen> {
                               });
                             },
                             style: ElevatedButton.styleFrom(
-                              primary: surveyAnswers[question] == true
-                                  ? Color.fromARGB(255, 174, 212, 175)
-                                  : Color.fromARGB(255, 255, 255, 255),
+                              backgroundColor: surveyAnswers[question] == true
+                                  ? const Color.fromARGB(255, 174, 212, 175)
+                                  : const Color.fromARGB(255, 255, 255, 255),
                             ),
-                            child: Text('Yes'),
+                            child: const Text('Yes'),
                           ),
-                          SizedBox(width: 10),
+                          const SizedBox(width: 10),
                           ElevatedButton(
                             onPressed: () {
                               setState(() {
@@ -69,11 +70,11 @@ class _MarketSurveyScreenState extends State<MarketSurveyScreen> {
                               });
                             },
                             style: ElevatedButton.styleFrom(
-                              primary: surveyAnswers[question] == false
+                              backgroundColor: surveyAnswers[question] == false
                                   ? const Color.fromARGB(255, 2, 75, 4)
                                   : const Color.fromARGB(255, 255, 255, 255),
                             ),
-                            child: Text('No'),
+                            child: const Text('No'),
                           ),
                         ],
                       ),
@@ -101,14 +102,14 @@ class _MarketSurveyScreenState extends State<MarketSurveyScreen> {
             ),
           );
         },
-        child: Icon(Icons.send),
+        child: const Icon(Icons.send),
       ),
     );
   }
 }
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: MarketSurveyScreen(),
   ));
 }

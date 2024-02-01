@@ -16,7 +16,7 @@ class _IntegralCurve extends Curve {
   /// Delta for integrating.
   static double delta = 0.01;
 
-  _IntegralCurve._(this.original, this.integral, this._values);
+  const _IntegralCurve._(this.original, this.integral, this._values);
 
   /// The original curve that was integrated.
   final Curve original;
@@ -685,7 +685,7 @@ class _MarqueeState extends State<Marquee> with SingleTickerProviderStateMixin {
   double _getTextWidth(BuildContext context) {
     final span = TextSpan(text: widget.text, style: widget.style);
 
-    final constraints = BoxConstraints(maxWidth: double.infinity);
+    const constraints = BoxConstraints(maxWidth: double.infinity);
 
     final richTextWidget = Text.rich(span).build(context) as RichText;
     final renderObject = richTextWidget.createRenderObject(context);
@@ -727,7 +727,7 @@ class _MarqueeState extends State<Marquee> with SingleTickerProviderStateMixin {
       controller: _controller,
       scrollDirection: widget.scrollAxis,
       reverse: widget.textDirection == TextDirection.rtl,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (_, i) {
         final text = i.isEven
             ? Text(widget.text,

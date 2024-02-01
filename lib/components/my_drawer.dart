@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:vishnu/components/image_picker.dart';
 import 'package:vishnu/pages/form_page.dart';
@@ -7,7 +6,6 @@ import 'package:vishnu/pages/prediction_page.dart';
 import 'package:vishnu/authentication/auth_service.dart';
 
 class MyDrawer extends StatelessWidget {
-  File? _selectedImage;
 
   void logout(BuildContext context) {
     final _auth = AuthService();
@@ -17,7 +15,7 @@ class MyDrawer extends StatelessWidget {
      // Replace '/login' with your login screen route
   }
 
-  MyDrawer({super.key});
+  const MyDrawer({super.key});
 
   
 
@@ -69,7 +67,7 @@ class MyDrawer extends StatelessWidget {
               Navigator.push(
               context,
                  MaterialPageRoute(
-                   builder: (context) =>  MarketSurveyScreen(),
+                   builder: (context) =>  const MarketSurveyScreen(),
                  ),
                );
             },
@@ -85,11 +83,7 @@ class MyDrawer extends StatelessWidget {
                 Navigator.push(
                 context,
                    MaterialPageRoute(
-                     builder: (context) =>  ImageInput(
-                       onPickImage: (image) {
-                        _selectedImage = image;
-                      },
-                     ),
+                     builder: (context) =>  const ImagePickerPage(),
                    ),
                  );
               },

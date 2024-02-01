@@ -4,7 +4,7 @@ import 'package:vishnu/components/bar_chart.dart';
 class LocalMoodPage extends StatelessWidget {
   final Map<String, bool> surveyAnswers;
 
-  LocalMoodPage({required this.surveyAnswers});
+  const LocalMoodPage({required this.surveyAnswers,super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +14,6 @@ class LocalMoodPage extends StatelessWidget {
     String message = (yesCount > noCount)
         ? "The commodity prices might go up in the coming days."
         : "The commodity prices might go down.";
-
-    double totalUsers = surveyAnswers.length.toDouble();
-    double yesPercentage = (yesCount / totalUsers) * 100.0;
-    double noPercentage = (noCount / totalUsers) * 100.0;
 
     return Scaffold(
       appBar: AppBar(

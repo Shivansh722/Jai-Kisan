@@ -107,7 +107,7 @@ class PieChartSampleState extends State {
           );
         case 4:
           return PieChartSectionData(
-            color: Color.fromARGB(255, 71, 179, 194),
+            color: const Color.fromARGB(255, 71, 179, 194),
             value: 7,
             title: '7%',
             radius: radius,
@@ -120,7 +120,7 @@ class PieChartSampleState extends State {
           );
         case 5:
           return PieChartSectionData(
-            color: Color.fromARGB(255, 165, 43, 43),
+            color: const Color.fromARGB(255, 165, 43, 43),
             value: 8,
             title: '8%',
             radius: radius,
@@ -133,7 +133,7 @@ class PieChartSampleState extends State {
           );
         case 6:
           return PieChartSectionData(
-            color: Color.fromARGB(255, 230, 24, 161),
+            color: const Color.fromARGB(255, 230, 24, 161),
             value: 5,
             title: '5%',
             radius: radius,
@@ -146,7 +146,7 @@ class PieChartSampleState extends State {
           );
         case 7:
           return PieChartSectionData(
-            color: Color.fromARGB(255, 224, 166, 39),
+            color: const Color.fromARGB(255, 224, 166, 39),
             value: 10,
             title: '10%',
             radius: radius,
