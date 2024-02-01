@@ -4,9 +4,18 @@ import 'package:flutter/material.dart';
 
 class ResultPage extends StatelessWidget {
 
-  const ResultPage({super.key, required this.selectedValues});
-  final List<String> selectedValues;
+  final String? selectedCommodity;
+  final String? selectedState;
+  final String? selectedDistrict;
+  final String? selectedMarket;
 
+  const ResultPage({
+    super.key,
+    required this.selectedCommodity,
+    required this.selectedState,
+    required this.selectedDistrict,
+    required this.selectedMarket
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +32,10 @@ class ResultPage extends StatelessWidget {
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 10.0),
-            for (String value in selectedValues)
-              Text(
-                value,
-                style: TextStyle(fontSize: 16.0),
-              ),
+            Text(
+              selectedCommodity ?? 'No Commodity Selected',
+              style: TextStyle(fontSize: 16.0),
+            ),
           ],
         ),
       ),
