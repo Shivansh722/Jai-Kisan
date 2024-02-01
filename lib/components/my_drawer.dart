@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vishnu/pages/login_page.dart';
+import 'package:vishnu/components/image_picker.dart';
+import 'package:vishnu/pages/form_page.dart';
 import 'package:vishnu/pages/settings_page.dart';
 import 'package:vishnu/pages/prediction_page.dart';
 import 'package:vishnu/authentication/auth_service.dart';
@@ -14,10 +15,13 @@ class MyDrawer extends StatelessWidget {
      // Replace '/login' with your login screen route
   }
 
-  const MyDrawer({Key? key});
+  const MyDrawer({super.key});
+
+  
 
   @override
   Widget build(BuildContext context) {
+    
     return Drawer(
       backgroundColor: Theme.of(context).colorScheme.background,
       child: Column(
@@ -33,17 +37,17 @@ class MyDrawer extends StatelessWidget {
           ),
 
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: ListTile(
-              title: Text('H O M E'),
-              leading: Icon(Icons.home),
+              title: const Text('H O M E'),
+              leading: const Icon(Icons.home),
               onTap: () => Navigator.pop(context),
             ),
           ),
 
           ListTile(
             title: const Text('P R E D I C T I O N'),
-            leading: Icon(Icons.batch_prediction),
+            leading: const Icon(Icons.batch_prediction),
             onTap: () {
               Navigator.pop(context);
               Navigator.push(
@@ -55,11 +59,42 @@ class MyDrawer extends StatelessWidget {
             },
           ),
 
+          ListTile(
+            title: const Text('F E E D B A C K'),
+            leading: const Icon(Icons.analytics),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+              context,
+                 MaterialPageRoute(
+                   builder: (context) =>  const MarketSurveyScreen(),
+                 ),
+               );
+            },
+          ),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListTile(
+              title: const Text('LEAF DISEASE DETECTION'),
+              leading: const Icon(Icons.energy_savings_leaf),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                context,
+                   MaterialPageRoute(
+                     builder: (context) =>  const ImagePickerPage(),
+                   ),
+                 );
+              },
+            ),
+          ),
+
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListTile(
               title: const Text('S E T T I N G S'),
-              leading: Icon(Icons.settings),
+              leading: const Icon(Icons.settings),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
@@ -75,8 +110,8 @@ class MyDrawer extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListTile(
-              title: Text('Logout'),
-              leading: Icon(Icons.logout),
+              title: const Text('Logout'),
+              leading: const Icon(Icons.logout),
               onTap: () {
                 Navigator.pop(context);
                 logout(context);

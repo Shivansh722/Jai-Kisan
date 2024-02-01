@@ -1,16 +1,20 @@
-from flask import Flask, request, jsonify
-import tensorflow as tf
-import numpy as np 
-from PIL import Image
-from io import BytesIO
 import pickle
+from io import BytesIO
+
+import numpy as np
+import requests
+import tensorflow as tf
 from commodity_mapping import commodity_map
 from district_mapping import district_mapping
+from flask import Flask, jsonify, request
+from flask_cors import CORS
 from market_mapping import market_mapping
+from PIL import Image
 from state_mapping import state_mapping
 
 app = Flask(__name__)
-
+CORS(app, supports_credentials=True, origins="*")
+# onnx
 with open('model3.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
     
@@ -27,6 +31,40 @@ def read_file_as_image(data) -> np.ndarray:
 def home():
     return jsonify({'message': 'Hello World'})
 
+@app.route('/current_price', methods=['POST'])
+def current_price():
+    try:
+        reqBody = request.get_json(force=True)
+        commodity = reqBody['commodity']
+        state = reqBody['state']
+        market = reqBody['market']
+        
+        url = "https://enam.gov.in/web/Liveprice_ctrl/trade_data_list_1"
+        headers = {
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "cookie": "SERVERID=node1; ci_session=rva8ajmdp0uv6sa65gtv80ctp3godkqa",
+        }
+        payload = "language=en&commodity={}&fromDate=2024-02-01&toDate=2024-02-01".format(commodity)
+
+        resp = requests.post(url, headers=headers, data=payload)
+        resObj = resp.json()
+        data = resObj['data']
+
+        # filter data
+        data = list(filter(lambda x: x['commodity'] == commodity, data))
+        data = list(filter(lambda x: x['state'] == state, data))
+        data = list(filter(lambda x: x['apmc'] == market, data))
+
+        return jsonify({
+            'success': True,
+            'prices': {
+                'max_price': data[0]['max_price'],
+                'min_price': data[0]['min_price'],
+                'modal_price': data[0]['modal_price']
+            }
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)})
 
 @app.route('/predict',methods=['post'])
 def get():
@@ -60,7 +98,11 @@ def get():
         ]
         print(user_input)
         result = model.predict([[user_input[0],user_input[1],user_input[2],user_input[3],0,0,user_input[4]]])
-        return jsonify({'message': result.tolist()})
+        # return jsonify({'message': result.tolist()})
+        return jsonify({
+            "success": True,
+            "price": result.tolist()[0]
+        })
     except Exception as e:
         return jsonify({'error': str(e)})
     
@@ -84,4 +126,4 @@ def predict():
         return jsonify({'error': str(e)})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", debug=True)

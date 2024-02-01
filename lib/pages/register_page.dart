@@ -76,7 +76,7 @@ class RegisterPage extends StatelessWidget {
             controller: _emailController,
           ),
 
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
 
           // Password textfield
           MyTextField(
@@ -85,7 +85,7 @@ class RegisterPage extends StatelessWidget {
             controller: _pwController,
           ),
 
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
 
           // Confirm password textfield
           MyTextField(
@@ -100,7 +100,7 @@ class RegisterPage extends StatelessWidget {
             onTap: () => register(context),
           ),
 
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
 
           // Register button
           Row(

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:vishnu/components/graph.dart';
-import 'package:vishnu/components/homePage_card.dart';
-import 'package:vishnu/components/my_drawer.dart';
 import 'package:vishnu/authentication/auth_service.dart';
+import 'package:vishnu/components/graph.dart';
+import 'package:vishnu/components/homepage_card.dart';
 import 'package:vishnu/components/live_bar.dart'; // Replace with the actual path to your LiveRunningBar widget
+import 'package:vishnu/components/my_drawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,8 +16,8 @@ class _HomePageState extends State<HomePage> {
   //logout function
   void logout() {
     //implement logout here
-    final _auth = AuthService();
-    _auth.signOut();
+    final auth = AuthService();
+    auth.signOut();
   }
 
   @override
@@ -42,12 +42,16 @@ class _HomePageState extends State<HomePage> {
             Container(
               height: 30,
               color: Colors.green.shade300,
-              child: const LiveRunningBar(price: 60,),
+              child: const LiveRunningBar(
+                price: 60,
+              ),
             ),
             const Center(
               child: CardWidget(),
             ),
-            const SizedBox(height: 30,),
+            const SizedBox(
+              height: 30,
+            ),
             Container(
               color: Colors.black12,
               width: MediaQuery.of(context).size.width,

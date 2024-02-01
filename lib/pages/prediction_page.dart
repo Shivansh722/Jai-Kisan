@@ -1,11 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:vishnu/components/dropdown_menu.dart';
 
 class PredictionPage extends StatefulWidget {
-  const PredictionPage({Key? key}) : super(key: key);
+  const PredictionPage({super.key});
 
   @override
-  _PredictionPageState createState() => _PredictionPageState();
+  State<PredictionPage> createState() => _PredictionPageState();
 }
 
 class _PredictionPageState extends State<PredictionPage> {
@@ -14,6 +17,33 @@ class _PredictionPageState extends State<PredictionPage> {
   String? selectedState;
   String? selectedDistrict;
   String? selectedMarket;
+  String price = "Predicted Price"; // Initial value
+
+  Future<void> fetchPrice() async {
+    var apiUrl = Uri.parse('http://127.0.0.1:5000/predict');
+
+    var body = json.encode({
+      'commodity': selectedCommodity,
+      'district': selectedDistrict,
+      'market': selectedMarket,
+      'state': selectedState,
+      'day': 0
+    });
+
+    final response = await http.post(
+      apiUrl,
+      body: body,
+    );
+
+    if (response.statusCode == 200) {
+      var data = json.decode(response.body);
+      setState(() {
+        price = data['price'].toString();
+      });
+    } else {
+      print('Request failed with status: ${response.statusCode}');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +51,7 @@ class _PredictionPageState extends State<PredictionPage> {
       appBar: AppBar(
         title: const Text('Prediction'),
       ),
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         height: double.infinity,
         child: Padding(
@@ -38,9 +68,14 @@ class _PredictionPageState extends State<PredictionPage> {
                       CustomDropdownButton(
                           label: "Commodity",
                           options: const [
-                            'Commodity1',
-                            'Commodity2',
-                            'Commodity3'
+                            'Potato',
+                            'Wheat',
+                            'Onion',
+                            'Tomato',
+                            'Green Gram Dal (Moong Dal)',
+                            'Rice',
+                            'Soyabean',
+                            'Lemon',
                           ],
                           selectedValue: selectedCommodity,
                           onChanged: (String? value) {
@@ -50,7 +85,19 @@ class _PredictionPageState extends State<PredictionPage> {
                           }),
                       CustomDropdownButton(
                           label: "State",
-                          options: const ['State1', 'State2', 'State3'],
+                          options: const [
+                            'Madhya Pradesh',
+                            'Punjab',
+                            'Uttar Pradesh',
+                            'Maharashtra',
+                            'Rajasthan',
+                            'Gujarat',
+                            'Andhra Pradesh',
+                            'Bihar',
+                            'Haryana',
+                            'Chhattisgarh',
+                            'Chandigarh'
+                          ],
                           selectedValue: selectedState,
                           onChanged: (String? value) {
                             setState(() {
@@ -60,9 +107,17 @@ class _PredictionPageState extends State<PredictionPage> {
                       CustomDropdownButton(
                           label: "District",
                           options: const [
-                            'District1',
-                            'District2',
-                            'District3'
+                            'Gautam Budh Nagar',
+                            'South District',
+                            'Ballia',
+                            'Imphal East',
+                            'Jhalawar',
+                            'Chitrakut',
+                            'Patiala',
+                            'Jalpaiguri',
+                            'Thoubal',
+                            'Fatehpur',
+                            'Hyderabad',
                           ],
                           selectedValue: selectedDistrict,
                           onChanged: (String? value) {
@@ -72,7 +127,25 @@ class _PredictionPageState extends State<PredictionPage> {
                           }),
                       CustomDropdownButton(
                           label: "Market",
-                          options: const ['Market1', 'Market2', 'Market3'],
+                          options: const [
+                            'Kalikiri',
+                            'Rajapalayam',
+                            'Bishramganj',
+                            'Lakhanpuri',
+                            'Nilagiri',
+                            'Uniyara',
+                            'Kondotty',
+                            'Lasalgaon(Niphad)',
+                            'Adampur',
+                            'Sathur',
+                            'Umreth',
+                            'Ruperdeeha',
+                            'Vemulawada',
+                            'Dharapuram',
+                            'Gauripur',
+                            'Baruwasagar',
+                            'Karamadai'
+                          ],
                           selectedValue: selectedMarket,
                           onChanged: (String? value) {
                             setState(() {
@@ -84,12 +157,17 @@ class _PredictionPageState extends State<PredictionPage> {
                   const SizedBox(height: 20.0),
                   ElevatedButton(
                     onPressed: () {
-                      // Handle the form submission here
-                      // You can access selectedCommodity, selectedState, etc.
-                      // and perform the necessary actions
-                      // For example, send the selected values to an API
+                      fetchPrice();
                     },
-                    child: Text('Submit'),
+                    child: const Text('Submit'),
+                  ),
+                  const SizedBox(height: 20.0),
+                  Text(
+                    'Price: $price',
+                    style: const TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),

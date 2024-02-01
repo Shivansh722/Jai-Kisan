@@ -8,7 +8,7 @@ class LoginPage extends StatelessWidget {
   final TextEditingController _pwController = TextEditingController();
   final void Function()? onTap;
 
-  LoginPage({Key? key, required this.onTap});
+  LoginPage({super.key, required this.onTap});
 
   void login(BuildContext context) async {
     // Implement login functionality here
@@ -65,7 +65,7 @@ class LoginPage extends StatelessWidget {
             controller: _emailController,
           ),
 
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
 
           // Password textfield
           MyTextField(
@@ -74,7 +74,7 @@ class LoginPage extends StatelessWidget {
             controller: _pwController,
           ),
 
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
 
           // Login button
           MyButton(
@@ -82,7 +82,7 @@ class LoginPage extends StatelessWidget {
             onTap: () => login(context),
           ),
 
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
 
           // Register button
           Row(
