@@ -1,10 +1,10 @@
 name: vishnu
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.2.4 <4.0.0'
+  sdk: ">=3.2.4 <4.0.0"
 
 dependencies:
   flutter:
@@ -15,6 +15,7 @@ dependencies:
   firebase_auth: ^4.16.0
   fl_chart:
   flutter_svg:
+  http:
 
 dev_dependencies:
   flutter_test:

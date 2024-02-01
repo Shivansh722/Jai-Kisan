@@ -1,16 +1,19 @@
-from flask import Flask, request, jsonify
-import tensorflow as tf
-import numpy as np 
-from PIL import Image
-from io import BytesIO
 import pickle
+from io import BytesIO
+
+import numpy as np
+import tensorflow as tf
 from commodity_mapping import commodity_map
 from district_mapping import district_mapping
+from flask import Flask, jsonify, request
+from flask_cors import CORS
 from market_mapping import market_mapping
+from PIL import Image
 from state_mapping import state_mapping
 
 app = Flask(__name__)
-
+CORS(app, supports_credentials=True, origins="*")
+# onnx
 with open('model3.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
     
@@ -60,7 +63,11 @@ def get():
         ]
         print(user_input)
         result = model.predict([[user_input[0],user_input[1],user_input[2],user_input[3],0,0,user_input[4]]])
-        return jsonify({'message': result.tolist()})
+        # return jsonify({'message': result.tolist()})
+        return jsonify({
+            "success": True,
+            "price": result.tolist()[0]
+        })
     except Exception as e:
         return jsonify({'error': str(e)})
     
