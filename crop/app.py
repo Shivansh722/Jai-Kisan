@@ -1,17 +1,8 @@
-# from flask import Flask
-# import pickle
-
-# app = Flask(__name__)   
-
-# model = pickle.load(open('model.pkl', 'rb'))
-# user_input = [[81,12,56,231,0,0,2]]
-# model.predict(user_input)
-'''
-chaiye kya
-
-'''
-
 from flask import Flask, request, jsonify
+import tensorflow as tf
+import numpy as np 
+from PIL import Image
+from io import BytesIO
 import pickle
 from commodity_mapping import commodity_map
 from district_mapping import district_mapping
@@ -22,6 +13,14 @@ app = Flask(__name__)
 
 with open('model3.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
+    
+MODEL = tf.keras.models.load_model("./saved_models/2")
+
+CLASS_NAMES = ["Early Blight", "Late Blight", "Healthy"]
+
+def read_file_as_image(data) -> np.ndarray:
+    image = np.array(Image.open(BytesIO(data)))
+    return image
     
 
 @app.route('/')
@@ -62,6 +61,25 @@ def get():
         print(user_input)
         result = model.predict([[user_input[0],user_input[1],user_input[2],user_input[3],0,0,user_input[4]]])
         return jsonify({'message': result.tolist()})
+    except Exception as e:
+        return jsonify({'error': str(e)})
+    
+    
+@app.route('/predictleaf', methods=['POST'])
+def predict():
+    try:
+        file = request.files['file']
+        image = read_file_as_image(file.read())
+        img_batch = np.expand_dims(image, 0)
+        
+        predictions = MODEL.predict(img_batch)
+
+        predicted_class = CLASS_NAMES[np.argmax(predictions[0])]
+        confidence = float(np.max(predictions[0]))
+        return jsonify({
+            'class': predicted_class,
+            'confidence': confidence
+        })
     except Exception as e:
         return jsonify({'error': str(e)})
 
