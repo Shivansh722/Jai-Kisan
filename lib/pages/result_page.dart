@@ -45,7 +45,6 @@ class ResultPage extends StatelessWidget {
                 ),
               ],
             ),
-            
             const SizedBox(height: 20.0),
             Row(
               children: [
@@ -68,7 +67,6 @@ class ResultPage extends StatelessWidget {
               maxPrice: '200',
             ),
           ),
-          
           ],
         ),
       ),
