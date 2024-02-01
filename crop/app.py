@@ -14,7 +14,7 @@ from state_mapping import state_mapping
 
 app = Flask(__name__)
 CORS(app, supports_credentials=True, origins="*")
-# onnx
+
 with open('model3.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
     
@@ -41,8 +41,8 @@ def current_price():
         
         url = "https://enam.gov.in/web/Liveprice_ctrl/trade_data_list_1"
         headers = {
-        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-        "cookie": "SERVERID=node1; ci_session=rva8ajmdp0uv6sa65gtv80ctp3godkqa",
+            "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+            "cookie": "SERVERID=node1; ci_session=rva8ajmdp0uv6sa65gtv80ctp3godkqa",
         }
         payload = "language=en&commodity={}&fromDate=2024-02-01&toDate=2024-02-01".format(commodity)
 
@@ -92,8 +92,6 @@ def get():
             state_value,
             district_value,
             market_value,
-            # data['month_Column']=0,
-            # data['season_names']=0,
             data['day']
         ]
         print(user_input)
