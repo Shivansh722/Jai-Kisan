@@ -12,6 +12,14 @@ An app for the Indian farmers which enhances their profits of produce.
 - Price Prediction and Current Day Price API
 
 
+## The problem Jai Kisan solves
+
+This project addresses the pressing real-world challenge faced by Indian farmers: the lack of timely and accurate information on crop prices in local markets. Ineffectual sales due to daily price fluctuations and limited market data access hinder farmers from maximizing their income. The project aims to bridge this gap by providing a user-friendly app and website offering real-time market prices, predictive insights, and personalized notifications. This not only empowers farmers with informed decision-making but also enhances their economic stability and overall well-being.
+
+## Challenges we ran into
+
+Indian farmers face daily price uncertainties in crop sales in Government administered markets, leading to suboptimal rates due to limited real-time market data. The challenge is compounded by the absence of nearby market awareness, resulting in varied prices.
+
 
 
 

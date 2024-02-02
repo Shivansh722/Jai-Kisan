@@ -55,6 +55,7 @@ def current_price():
         data = list(filter(lambda x: x['state'] == state, data))
         data = list(filter(lambda x: x['apmc'] == market, data))
 
+        print(data)
         return jsonify({
             'success': True,
             'prices': {
