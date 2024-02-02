@@ -1,16 +1,58 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
-class PriceCard extends StatelessWidget {
-  final String minPrice;
-  final String modelPrice;
-  final String maxPrice;
-
-  const PriceCard({
+// ignore: must_be_immutable
+class PriceCard extends StatefulWidget {
+  PriceCard({
     super.key,
-    required this.minPrice,
-    required this.modelPrice,
-    required this.maxPrice,
   });
+
+  String minPrice = "loading..."; // Initial value
+  String modelPrice = "loading...";
+  String maxPrice = "loading...";
+
+  @override
+  State<PriceCard> createState() => _PriceCardState();
+}
+
+class _PriceCardState extends State<PriceCard> {
+  Future<void> fetchPrice() async {
+    var apiUrl = Uri.parse('http://127.0.0.1:5000/current_price');
+
+    var body = json.encode(
+        {"commodity": "WHEAT", "state": "MADHYA PRADESH", "market": "BERASIA"});
+
+    try {
+      final response = await http.post(
+        apiUrl,
+        body: body,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      );
+
+      if (response.statusCode == 200) {
+        var data = json.decode(response.body)["prices"];
+        setState(() {
+          widget.minPrice = data['min_price'].toString();
+          widget.modelPrice = data['modal_price'].toString();
+          widget.maxPrice = data['max_price'].toString();
+        });
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (error) {
+      print('Error: $error');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchPrice();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +79,9 @@ class PriceCard extends StatelessWidget {
                 2: IntrinsicColumnWidth(),
               },
               children: [
-                buildTableRow('Min. Price: ', minPrice),
-                buildTableRow('Model Price: ', modelPrice),
-                buildTableRow('Max. Price: ', maxPrice),
+                buildTableRow('Min. Price: ', widget.minPrice),
+                buildTableRow('Model Price: ', widget.modelPrice),
+                buildTableRow('Max. Price: ', widget.maxPrice),
               ],
             ),
           ],
@@ -51,35 +93,24 @@ class PriceCard extends StatelessWidget {
   TableRow buildTableRow(String label, String value) {
     return TableRow(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Expanded(
-              flex: 3,
-              child: TableCell(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Text(
-                    label,
-                    style: const TextStyle(fontSize: 16.0),
-                  ),
-                ),
-              ),
+        TableCell(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Text(
+              label,
+              style: const TextStyle(fontSize: 16.0),
             ),
-            const SizedBox(width: 45.0),
-            Expanded(
-              flex: 1,
-              child: TableCell(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Text(
-                    value,
-                    style: const TextStyle(fontSize: 16.0),
-                  ),
-                ),
-              ),
+          ),
+        ),
+        const SizedBox(width: 45.0),
+        TableCell(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Text(
+              value,
+              style: const TextStyle(fontSize: 16.0),
             ),
-          ],
+          ),
         ),
       ],
     );

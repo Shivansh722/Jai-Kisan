@@ -43,7 +43,16 @@ class _CardWidgetState extends State<CardWidget> {
               children: [
                 CustomDropdownButton(
                     label: "Commodity",
-                    options: const ['Commodity1', 'Commodity2', 'Commodity3'],
+                    options: const [
+                      'Potato',
+                      'Wheat',
+                      'Onion',
+                      'Tomato',
+                      'Green Gram Dal (Moong Dal)',
+                      'Rice',
+                      'Soyabean',
+                      'Lemon',
+                    ],
                     selectedValue: selectedCommodity,
                     onChanged: (String? value) {
                       setState(() {
@@ -53,9 +62,17 @@ class _CardWidgetState extends State<CardWidget> {
                 CustomDropdownButton(
                     label: "State",
                     options: const [
-                      'State1           ',
-                      'State2           ',
-                      'State3           '
+                      'Madhya Pradesh',
+                      'Punjab',
+                      'Uttar Pradesh',
+                      'Maharashtra',
+                      'Rajasthan',
+                      'Gujarat',
+                      'Andhra Pradesh',
+                      'Bihar',
+                      'Haryana',
+                      'Chhattisgarh',
+                      'Chandigarh'
                     ],
                     selectedValue: selectedState,
                     onChanged: (String? value) {
@@ -66,9 +83,17 @@ class _CardWidgetState extends State<CardWidget> {
                 CustomDropdownButton(
                     label: "District",
                     options: const [
-                      'District1        ',
-                      'District2        ',
-                      'District3        '
+                      'Gautam Budh Nagar',
+                      'South District',
+                      'Ballia',
+                      'Imphal East',
+                      'Jhalawar',
+                      'Chitrakut',
+                      'Patiala',
+                      'Jalpaiguri',
+                      'Thoubal',
+                      'Fatehpur',
+                      'Hyderabad',
                     ],
                     selectedValue: selectedDistrict,
                     onChanged: (String? value) {
@@ -79,9 +104,15 @@ class _CardWidgetState extends State<CardWidget> {
                 CustomDropdownButton(
                     label: "Market",
                     options: const [
-                      'Market1        ',
-                      'Market2        ',
-                      'Market3        '
+                      'Kalikiri',
+                      'Rajapalayam',
+                      'Bishramganj',
+                      'Lakhanpuri',
+                      'Nilagiri',
+                      'Uniyara',
+                      'Kondotty',
+                      'Lasalgaon(Niphad)',
+                      'Adampur',
                     ],
                     selectedValue: selectedMarket,
                     onChanged: (String? value) {

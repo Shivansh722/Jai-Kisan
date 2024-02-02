@@ -4,19 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:vishnu/components/price_card.dart';
 
 class ResultPage extends StatelessWidget {
-
   final String? selectedCommodity;
   final String? selectedState;
   final String? selectedDistrict;
   final String? selectedMarket;
 
-  const ResultPage({
-    super.key,
-    required this.selectedCommodity,
-    required this.selectedState,
-    required this.selectedDistrict,
-    required this.selectedMarket
-  });
+  const ResultPage(
+      {super.key,
+      required this.selectedCommodity,
+      required this.selectedState,
+      required this.selectedDistrict,
+      required this.selectedMarket});
 
   @override
   Widget build(BuildContext context) {
@@ -54,19 +52,15 @@ class ResultPage extends StatelessWidget {
                 ),
                 const SizedBox(width: 10.0),
                 Text(
-                  selectedCommodity?? 'No Commodity Selected',
+                  selectedCommodity ?? 'No Commodity Selected',
                   style: const TextStyle(fontSize: 16.0),
                 ),
               ],
             ),
             const SizedBox(height: 20.0),
-            const Center(
-            child: PriceCard(
-              minPrice: '100',
-              modelPrice: '150',
-              maxPrice: '200',
+            Center(
+              child: PriceCard(),
             ),
-          ),
           ],
         ),
       ),
