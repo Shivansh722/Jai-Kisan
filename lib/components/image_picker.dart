@@ -5,17 +5,17 @@ import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 
 class ImagePickerPage extends StatefulWidget {
-  const ImagePickerPage({super.key});
+  ImagePickerPage({super.key});
+
+  XFile? _selectedImage;
+  String? _resultClass;
+  double? _resultConfidence;
 
   @override
   State<ImagePickerPage> createState() => _ImagePickerPageState();
 }
 
 class _ImagePickerPageState extends State<ImagePickerPage> {
-  File? _selectedImage;
-  String? _resultClass;
-  double? _resultConfidence;
-
   Future<void> _takePicture() async {
     final imagePicker = ImagePicker();
     final pickedImage = await imagePicker.pickImage(
@@ -28,9 +28,9 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
     }
 
     setState(() {
-      _selectedImage = File(pickedImage.path);
-      _resultClass = null;
-      _resultConfidence = null;
+      widget._selectedImage = pickedImage;
+      widget._resultClass = null;
+      widget._resultConfidence = null;
     });
   }
 
@@ -46,30 +46,33 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
     }
 
     setState(() {
-      _selectedImage = File(pickedImage.path);
-      _resultClass = null;
-      _resultConfidence = null;
+      widget._selectedImage = pickedImage;
+      widget._resultClass = null;
+      widget._resultConfidence = null;
     });
   }
 
   Future<void> _submitImage() async {
-    if (_selectedImage == null) {
+    if (widget._selectedImage == null) {
       // No image selected
       return;
     }
 
-    final apiUrl = Uri.parse("http://127.0.0.1:5000/predictleaf");
-    final imageBytes = await _selectedImage!.readAsBytes();
-    final response = await http.post(
-      apiUrl,
-      body: imageBytes,
-    );
+    final apiUrl = Uri.parse("http://10.5.144.216:5000/predictleaf");
+    final imageBytes = await widget._selectedImage!.readAsBytes();
+    final request = http.MultipartRequest('POST', apiUrl)
+      ..files.add(
+        await http.MultipartFile.fromPath("file", widget._selectedImage!.path),
+      );
+
+    final response = await request.send();
 
     if (response.statusCode == 200) {
-      final Map<String, dynamic> data = json.decode(response.body);
+      final Map<String, dynamic> data =
+          json.decode(await response.stream.bytesToString());
       setState(() {
-        _resultClass = data['class'];
-        _resultConfidence = data['confidence'];
+        widget._resultClass = data['class'];
+        widget._resultConfidence = data['confidence'];
       });
     } else {
       // Handle API error
@@ -102,20 +105,20 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
               child: const Text('Submit'),
             ),
             const SizedBox(height: 20),
-            if (_selectedImage != null)
+            if (widget._selectedImage != null)
               Image.file(
-                _selectedImage!,
+                File(widget._selectedImage!.path),
                 height: 200,
                 width: 200,
                 fit: BoxFit.cover,
               ),
-            if (_resultClass != null && _resultConfidence != null)
-              Column(
-                children: [
-                  Text('Class: $_resultClass'),
-                  Text('Confidence: $_resultConfidence'),
-                ],
-              ),
+            // if (_resultClass != null && _resultConfidence != null)
+            Column(
+              children: [
+                Text('Class: ${widget._resultClass}'),
+                Text('Confidence: ${widget._resultConfidence}'),
+              ],
+            ),
           ],
         ),
       ),

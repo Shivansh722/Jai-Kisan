@@ -50,7 +50,20 @@ class _HomePageState extends State<HomePage> {
               child: CardWidget(),
             ),
             const SizedBox(
-              height: 30,
+              height: 15,
+            ),
+            Container(
+              alignment: Alignment.center,
+              child: const Text(
+                "Past 7 days data: ",
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
+            ),
+            const SizedBox(
+              height: 25,
             ),
             Container(
               color: Colors.black12,

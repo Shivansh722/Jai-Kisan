@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vishnu/components/fetch_graph_data.dart';
 import 'package:vishnu/components/image_picker.dart';
 import 'package:vishnu/pages/form_page.dart';
 import 'package:vishnu/pages/settings_page.dart';
@@ -83,7 +84,7 @@ class MyDrawer extends StatelessWidget {
                 Navigator.push(
                 context,
                    MaterialPageRoute(
-                     builder: (context) =>  const ImagePickerPage(),
+                     builder: (context) =>  ImagePickerPage(),
                    ),
                  );
               },
@@ -100,7 +101,7 @@ class MyDrawer extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const SettingsPage(),
+                    builder: (context) => FetchData(),
                   ),
                 );
               },

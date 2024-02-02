@@ -17,6 +17,9 @@ dependencies:
   flutter_svg:
   http:
   image_picker:
+  flutter_localizations:
+    sdk: flutter
+  intl:
 
 dev_dependencies:
   flutter_test:

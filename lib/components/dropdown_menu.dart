@@ -35,6 +35,7 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
         Expanded(
           flex: 2,
           child: DropdownButton<String>(
+            isExpanded: true,
             value: widget.selectedValue,
             onChanged: widget.onChanged,
             items: widget.options

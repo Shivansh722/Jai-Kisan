@@ -14,6 +14,8 @@ class _LineChartWidgetState extends State<LineChartWidget> {
     Colors.yellowAccent,
   ];
 
+  List<double> prices = [3101.4, 3133.15, 3241.81, 3181.75, 3311.0, 3147.22, 3011.2];
+
   bool showAvg = false;
 
   @override
@@ -112,19 +114,19 @@ class _LineChartWidgetState extends State<LineChartWidget> {
     String text;
     switch (value.toInt()) {
       case 1:
-        text = '1k';
+        text = '2.9k';
         break;
       case 2:
-        text = '2k';
-        break;
-      case 3:
         text = '3k';
         break;
+      case 3:
+        text = '3.1k';
+        break;
       case 4:
-        text = '4k';
+        text = '3.2k';
         break;
       case 5:
-        text = '5k';
+        text = '3.3k';
         break;
       default:
         return Container();
@@ -199,19 +201,19 @@ class _LineChartWidgetState extends State<LineChartWidget> {
         border: Border.all(color: const Color(0xff37434d)),
       ),
       minX: 0,
-      maxX: 11,
+      maxX: prices.length.toDouble() - 1,
       minY: 0,
       maxY: 6,
       lineBarsData: [
         LineChartBarData(
           spots: const [
-            FlSpot(0, 3),
-            FlSpot(2.6, 2),
-            FlSpot(4.9, 5),
-            FlSpot(6.8, 3.1),
-            FlSpot(8, 4),
-            FlSpot(9.5, 3),
-            FlSpot(11, 4),
+            FlSpot(0, 3.101),
+            FlSpot(1, 3.133),
+            FlSpot(2, 4.241),
+            FlSpot(3, 3.181),
+            FlSpot(4, 5.311),
+            FlSpot(5, 3.147),
+            FlSpot(6, 2.011),
           ],
           isCurved: true,
           gradient: LinearGradient(
