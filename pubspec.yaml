@@ -20,6 +20,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl:
+  introduction_screen:
 
 dev_dependencies:
   flutter_test:
@@ -31,3 +32,9 @@ flutter:
   assets:
     - lib/assets/splash.png
     - lib/assets/splash2.jpg
+    - lib/assets/farmer1.jpg
+    - lib/assets/farmer2.jpg
+    - lib/assets/farmer_mobile.jpg
+    - lib/assets/farmers.jpg
+    - lib/assets/tractor.jpg
+    
