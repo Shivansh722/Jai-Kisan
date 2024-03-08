@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-
+import 'package:vishnu/fonts/app_fonts.dart';
 
 ThemeData lightMode = ThemeData(
-  colorScheme: ColorScheme.light(
-    background: const Color.fromARGB(255, 176, 232, 179),
-    primary: Colors.green.shade500,
-    secondary: Colors.green.shade700,
+  textTheme: FontConfig.textTheme,
+  colorScheme: const ColorScheme.light(
+    background: Color.fromARGB(255, 176, 232, 179),
+    primary: Color.fromARGB(255, 1, 95, 101),
+    secondary: Color.fromARGB(255, 4, 52, 60),
     tertiary: Colors.white,
-    inversePrimary: Colors.green.shade900,
+    inversePrimary: Color.fromARGB(255, 4, 39, 55),
   ),
 );

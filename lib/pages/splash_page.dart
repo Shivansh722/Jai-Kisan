@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:vishnu/authentication/auth_gate.dart';
 
@@ -25,21 +26,21 @@ class OnBoardingPageState extends State<OnBoardingPage> {
 
   @override
   Widget build(BuildContext context) {
-    const bodyStyle = TextStyle(fontSize: 19.0);
+    const bodyStyle = TextStyle(
+      fontSize: 15.0,
+    );
 
-    const pageDecoration = PageDecoration(
-        titleTextStyle: TextStyle(
-          fontSize: 28.0,
-          fontWeight: FontWeight.w700,
-        ),
-        titlePadding: EdgeInsets.only(top: 20.0, bottom: 25.0),
-        bodyTextStyle: bodyStyle,
-        bodyPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
-        pageColor: Colors.white,
-        imagePadding: EdgeInsets.only(
-          top: 90,
-        ),
-      );
+    var pageDecoration = PageDecoration(
+      titleTextStyle: GoogleFonts.nunito(
+          fontSize: 28.0, fontWeight: FontWeight.bold, color: Colors.black87),
+      titlePadding: EdgeInsets.only(top: 20.0, bottom: 5.0),
+      bodyTextStyle: bodyStyle,
+      bodyPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
+      pageColor: Colors.white,
+      imagePadding: EdgeInsets.only(
+        top: 90,
+      ),
+    );
 
     return IntroductionScreen(
       key: introKey,
@@ -52,7 +53,7 @@ class OnBoardingPageState extends State<OnBoardingPage> {
         height: 60,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.green,
+            backgroundColor: const Color.fromARGB(255, 1, 95, 101),
             foregroundColor: Colors.white,
           ),
           child: const Text(
@@ -72,8 +73,7 @@ class OnBoardingPageState extends State<OnBoardingPage> {
         ),
         PageViewModel(
           title: "Predict the prices",
-          body:
-              "Predict the prices of crops and make informed decisions.",
+          body: "Predict the prices of crops and make informed decisions.",
           image: _buildImage('farmer1.jpg'),
           decoration: pageDecoration,
         ),
@@ -127,9 +127,13 @@ class OnBoardingPageState extends State<OnBoardingPage> {
           ? const EdgeInsets.all(12.0)
           : const EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),
       dotsDecorator: const DotsDecorator(
-        size: Size(10.0, 10.0),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(25.0)),
+        ),
+        spacing: EdgeInsets.only(right: 8),
+        size: Size(15.0, 5.0),
         color: Color(0xFFBDBDBD),
-        activeSize: Size(22.0, 10.0),
+        activeSize: Size(20.0, 5.0),
         activeShape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(25.0)),
         ),
