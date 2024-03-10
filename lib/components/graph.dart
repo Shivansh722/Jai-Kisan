@@ -1,8 +1,9 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:vishnu/components/fetch_graph_data.dart';
 
 class LineChartWidget extends StatefulWidget {
-  const LineChartWidget({super.key});
+  const LineChartWidget({Key? key});
 
   @override
   State<LineChartWidget> createState() => _LineChartWidgetState();
@@ -14,9 +15,21 @@ class _LineChartWidgetState extends State<LineChartWidget> {
     Colors.yellowAccent,
   ];
 
-  List<double> prices = [3101.4, 3133.15, 3241.81, 3181.75, 3311.0, 3147.22, 3011.2];
-
   bool showAvg = false;
+  late List<double> prices;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    prices = await FetchData.fetchData();
+    // Add any additional logic here if needed
+    print(prices);
+    setState(() {}); // Trigger a rebuild to reflect the updated data
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -206,15 +219,7 @@ class _LineChartWidgetState extends State<LineChartWidget> {
       maxY: 6,
       lineBarsData: [
         LineChartBarData(
-          spots: const [
-            FlSpot(0, 3.101),
-            FlSpot(1, 3.133),
-            FlSpot(2, 4.241),
-            FlSpot(3, 3.181),
-            FlSpot(4, 5.311),
-            FlSpot(5, 3.147),
-            FlSpot(6, 2.011),
-          ],
+          spots: List.generate(prices.length, (index) => FlSpot(index.toDouble(), prices[index])),
           isCurved: true,
           gradient: LinearGradient(
             colors: gradientColors,

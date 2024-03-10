@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:vishnu/components/fetch_graph_data.dart';
 import 'package:vishnu/components/image_picker.dart';
 import 'package:vishnu/pages/form_page.dart';
 import 'package:vishnu/pages/settings_page.dart';
 import 'package:vishnu/pages/prediction_page.dart';
 import 'package:vishnu/authentication/auth_service.dart';
+import 'package:vishnu/pages/weather_page.dart';
 
 class MyDrawer extends StatelessWidget {
 
@@ -85,6 +85,23 @@ class MyDrawer extends StatelessWidget {
                 context,
                    MaterialPageRoute(
                      builder: (context) =>  ImagePickerPage(),
+                   ),
+                 );
+              },
+            ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListTile(
+              title: const Text('WEATHER'),
+              leading: const Icon(Icons.cloud),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                context,
+                   MaterialPageRoute(
+                     builder: (context) =>  const WeatherPage(),
                    ),
                  );
               },
