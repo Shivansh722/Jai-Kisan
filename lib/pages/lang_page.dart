@@ -5,11 +5,7 @@ import 'package:vishnu/pages/home_page_hn.dart';
 import 'package:vishnu/components/lang_card.dart';
 
 class LangPage extends StatelessWidget {
-  void logout() {
-    // implement logout here
-    final auth = AuthService();
-    auth.signOut();
-  }
+
   const LangPage({Key? key});
 
  
