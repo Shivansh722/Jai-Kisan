@@ -3,7 +3,14 @@ import 'package:vishnu/pages/home_page_en.dart';
 import 'package:vishnu/pages/home_page_hn.dart';
 import 'package:vishnu/components/lang_card.dart';
 
+import '../authentication/auth_service.dart';
+
 class LangPage extends StatelessWidget {
+  void logout() {
+    // implement logout here
+    final auth = AuthService();
+    auth.signOut();
+  }
   const LangPage({Key? key});
 
   @override
