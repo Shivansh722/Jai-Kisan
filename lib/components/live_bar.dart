@@ -11,7 +11,7 @@ class LiveRunningBar extends StatelessWidget {
     bool isPriceHigh = price > 50.0;
 
     return Container(
-      color: isPriceHigh ? Colors.red : Colors.green,
+      color: isPriceHigh ? Colors.green : Colors.red,
       height: 30,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

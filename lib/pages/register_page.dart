@@ -3,106 +3,84 @@ import 'package:vishnu/components/my_button.dart';
 import 'package:vishnu/components/textfield.dart';
 import 'package:vishnu/authentication/auth_service.dart';
 
-
 class RegisterPage extends StatelessWidget {
-   RegisterPage({super.key, required this.onTap});
-  
+  RegisterPage({Key? key, required this.onTap}) : super(key: key);
+
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _pwController = TextEditingController();
   final TextEditingController _confirmPwController = TextEditingController();
+  final void Function()? onTap;
 
-  final void Function()?  onTap;
-
-  void register(BuildContext context) {
-    // Implement login functionality here
-    //this is a ui function, so we can use setState
-    //geting the auth service instance
+  Future<void> register(BuildContext context) async {
     final _auth = AuthService();
 
-    //check if the passwords match, then creating the user
-    if(_pwController.text == _confirmPwController.text)
-    { 
+    if (_pwController.text == _confirmPwController.text) {
       try {
-        _auth.signUpWithEmailAndPassword(_emailController.text, _pwController.text);
+        await _auth.signUpWithEmailAndPassword(
+          _emailController.text,
+          _pwController.text,
+        );
       } catch (e) {
         showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text(e.toString()),
-        )
-      );
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(e.toString()),
+          ),
+        );
       }
-    }
-    //if the passwords don't match, then don't 
-    else {
+    } else {
       showDialog(
         context: context,
         builder: (context) => const AlertDialog(
           title: Text("Passwords don't match"),
-        )
+        ),
       );
     }
-    
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.secondary,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Logo
           Image.asset(
-            'lib/assets/splash2.jpg',
+            'lib/assets/JK_logo.png',
             width: 300,
             height: 250,
           ),
-
-          // Welcome back message
-          const Text(
+          Text(
             "Let's create an account for you!",
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 46, 107, 42),
+              color: Theme.of(context).colorScheme.background,
             ),
           ),
-
-          // Email textfield
           MyTextField(
             hintText: 'Email',
             obscureText: false,
             controller: _emailController,
           ),
-
           const SizedBox(height: 10),
-
-          // Password textfield
           MyTextField(
             hintText: 'Password',
             obscureText: true,
             controller: _pwController,
           ),
-
           const SizedBox(height: 10),
-
-          // Confirm password textfield
           MyTextField(
             hintText: 'Confirm Password',
             obscureText: true,
             controller: _confirmPwController,
           ),
-
-          // Login button
+          SizedBox(height: 10),
           MyButton(
             text: "Register now!",
             onTap: () => register(context),
           ),
-
           const SizedBox(height: 10),
-
-          // Register button
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -113,13 +91,13 @@ class RegisterPage extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap:onTap,
+                onTap: onTap,
                 child: Text(
                   " Login now!",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.primary,
+                    color: Theme.of(context).colorScheme.inversePrimary,
                   ),
                 ),
               ),

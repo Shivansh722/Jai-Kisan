@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vishnu/pages/local_mood.dart';
 
 class MarketSurveyScreen extends StatefulWidget {
-  const MarketSurveyScreen({super.key});
+  const MarketSurveyScreen({Key? key});
   @override
   State<MarketSurveyScreen> createState() => _MarketSurveyScreenState();
 }

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:vishnu/components/bar_chart.dart';
 
 class LocalMoodPage extends StatelessWidget {
   final Map<String, bool> surveyAnswers;
 
-  const LocalMoodPage({Key? key, required this.surveyAnswers}) : super(key: key);
+  LocalMoodPage({required this.surveyAnswers});
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +14,13 @@ class LocalMoodPage extends StatelessWidget {
         ? "The commodity prices might go up in the coming days."
         : "The commodity prices might go down.";
 
+    double totalUsers = surveyAnswers.length.toDouble();
+    double yesPercentage = (yesCount / totalUsers) * 100.0;
+    double noPercentage = (noCount / totalUsers) * 100.0;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Local Mood'),
+        title: Text('Local Mood'),
       ),
       body: Center(
         child: Padding(
@@ -34,25 +37,27 @@ class LocalMoodPage extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               Card(
                 elevation: 3,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
-                      const SizedBox(height: 20),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.3,
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            BarChartSample1(
-                              surveyAnswers: surveyAnswers,
-                            ),
-                          ],
+                      Text(
+                        'Survey Results',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
+                      ),
+                      SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          _buildGraphItem('Yes', yesPercentage),
+                          _buildGraphItem('No', noPercentage),
+                        ],
                       ),
                     ],
                   ),
@@ -66,30 +71,33 @@ class LocalMoodPage extends StatelessWidget {
   }
 
   Widget _buildGraphItem(String label, double percentage) {
-    return Column(
-      children: [
-        Text(
-          '$label: ${percentage.toStringAsFixed(1)}%',
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
+    return Expanded(
+      child: Column(
+        children: [
+          Text(
+            '$label: ${percentage.toStringAsFixed(1)}%',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-        const SizedBox(height: 8),
-        Container(
-          height: percentage,
-          width: 40,
-          color: (label == 'Yes') ? Colors.green : Colors.red,
-          child: Center(
-            child: Text(
-              '${percentage.toStringAsFixed(1)}%',
-              style: const TextStyle(
-                color: Colors.white,
+          SizedBox(height: 8),
+          Expanded(
+            child: Container(
+              width: 30,
+              color: (label == 'Yes') ? Colors.green : Colors.red,
+              child: Center(
+                child: Text(
+                  '${percentage.toStringAsFixed(1)}%',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

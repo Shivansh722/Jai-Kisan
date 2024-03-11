@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vishnu/components/dropdown_menu.dart';
 import 'package:vishnu/pages/result_page.dart';
+import 'package:vishnu/components/dropdown_menu.dart';
 
 class CardWidget extends StatefulWidget {
   const CardWidget({
@@ -19,22 +19,35 @@ class _CardWidgetState extends State<CardWidget> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Card(
       elevation: 10,
-      shadowColor: const Color.fromARGB(255, 0, 68, 2),
-      surfaceTintColor: const Color.fromARGB(255, 0, 114, 4),
+      color: Color.fromARGB(255,154,208,194),
+       // Set the desired background color here
+      shadowColor: const Color.fromARGB(255,38,80,115),
+      surfaceTintColor: const Color.fromARGB(255,38,80,115),
       margin: const EdgeInsets.all(16.0),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text(
-              "Today's Live Price",
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              children: [
+                Icon(
+                  Icons.live_tv_outlined,
+                  size: 18.0,
+                  color: Colors.black,
+                ),
+                const SizedBox(width: 8.0),
+                Text(
+                  "Today's Live Price",
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
             const Divider(height: 20.0, color: Colors.black),
             const SizedBox(height: 20.0),

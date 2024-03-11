@@ -1,7 +1,6 @@
-// results_page.dart
-
 import 'package:flutter/material.dart';
-import 'package:vishnu/components/price_card.dart';
+import 'package:vishnu/services/price_card.dart';
+// results_page.dart
 
 class ResultPage extends StatelessWidget {
   final String? selectedCommodity;
@@ -10,11 +9,12 @@ class ResultPage extends StatelessWidget {
   final String? selectedMarket;
 
   const ResultPage(
-      {super.key,
-      required this.selectedCommodity,
-      required this.selectedState,
-      required this.selectedDistrict,
-      required this.selectedMarket});
+      {Key? key,
+      this.selectedCommodity,
+      this.selectedState,
+      this.selectedDistrict,
+      this.selectedMarket})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
