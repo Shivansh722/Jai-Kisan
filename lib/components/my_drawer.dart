@@ -94,23 +94,6 @@ class MyDrawer extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListTile(
-              title: const Text('S E T T I N G S'),
-              leading: const Icon(Icons.settings),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => FetchData(),
-                  ),
-                );
-              },
-            ),
-          ),
-
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListTile(
               title: const Text('Logout'),
               leading: const Icon(Icons.logout),
               onTap: () {

@@ -19,7 +19,8 @@ class PriceCard extends StatefulWidget {
 
 class _PriceCardState extends State<PriceCard> {
   Future<void> fetchPrice() async {
-    var apiUrl = Uri.parse('http://127.0.0.1:5000/current_price');
+    var apiUrl = Uri.parse('http://10.5.178.63:5000/current_price');
+    // var apiUrl = Uri.parse('http://127.0.0.1:5000/current_price');
 
     var body = json.encode(
         {"commodity": "WHEAT", "state": "MADHYA PRADESH", "market": "BERASIA"});
