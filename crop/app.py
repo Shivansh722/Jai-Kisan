@@ -37,35 +37,45 @@ def current_price():
         reqBody = request.get_json(force=True)
         commodity = reqBody['commodity']
         state = reqBody['state']
-        market = reqBody['market']
+        market = reqBody['market']  # Make sure 'market' matches the key in the request JSON
         
-        url = "https://enam.gov.in/web/Liveprice_ctrl/trade_data_list_1"
+        url = "https://enam.gov.in/web/Ajax_ctrl/trade_data_list"
         headers = {
-            "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-            "cookie": "SERVERID=node1; ci_session=rva8ajmdp0uv6sa65gtv80ctp3godkqa",
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+            "Cookie": "SERVERID=node1; ci_session=hkhrqtfs9a2rgubir1gmj512n4l601m5; uniqueCode=20240719088",
         }
-        payload = "language=en&commodity={}&fromDate=2024-02-01&toDate=2024-02-01".format(commodity)
+        payload = "language=en&commodityName={}&stateName={}&apmcName={}&fromDate=2024-03-07&toDate=2024-03-10".format(commodity, state, market)  
 
         resp = requests.post(url, headers=headers, data=payload)
         resObj = resp.json()
-        data = resObj['data']
+        print(resObj)
+        
+        if 'data' in resObj:
+            data = resObj['data']
+            
+            # filter data
+            data = list(filter(lambda x: x['commodity'] == commodity, data))
+            data = list(filter(lambda x: x['state'] == state, data))
+            data = list(filter(lambda x: x['apmc'] == market, data))
 
-        # filter data
-        data = list(filter(lambda x: x['commodity'] == commodity, data))
-        data = list(filter(lambda x: x['state'] == state, data))
-        data = list(filter(lambda x: x['apmc'] == market, data))
-
-        print(data)
-        return jsonify({
-            'success': True,
-            'prices': {
-                'max_price': data[0]['max_price'],
-                'min_price': data[0]['min_price'],
-                'modal_price': data[0]['modal_price']
-            }
-        })
+            print(data)
+            if data:
+                return jsonify({
+                    'success': True,
+                    'prices': {
+                        'max_price': data[0]['max_price'],
+                        'min_price': data[0]['min_price'],
+                        'modal_price': data[0]['modal_price']
+                    }
+                })
+            else:
+                return jsonify({'error': 'No data found for the given criteria.'})
+        else:
+            return jsonify({'error': 'No data returned from the server.'})
+        
     except Exception as e:
-        return jsonify({'error': str(e)})
+        print(e)
+        return jsonify({'error': 'An error occurred: ' + str(e)})
 
 @app.route('/predict',methods=['post'])
 def get():
