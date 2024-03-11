@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:vishnu/components/image_picker.dart';
 import 'package:vishnu/pages/form_page.dart';
+import 'package:vishnu/pages/plant_image.dart';
+import 'package:vishnu/pages/weather_page.dart';
 import 'package:vishnu/pages/settings_page.dart';
 import 'package:vishnu/pages/prediction_page.dart';
 import 'package:vishnu/authentication/auth_service.dart';
-import 'package:vishnu/pages/weather_page.dart';
+import 'package:vishnu/components/image_picker_helper.dart';
 
 class MyDrawer extends StatelessWidget {
   void logout(BuildContext context) {

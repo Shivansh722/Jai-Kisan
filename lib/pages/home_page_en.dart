@@ -6,14 +6,14 @@ import 'package:vishnu/components/homepage_card.dart';
 import 'package:vishnu/authentication/auth_service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class HomePageEn extends StatefulWidget {
+  const HomePageEn({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomePageEn> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePageEn> {
   final AuthService _auth = AuthService();
 
   // Logout function
